@@ -4,7 +4,25 @@ class Store {
   constructor(options) {
     this._mutations = options.mutations
     this._actions = options.actions
-    
+    this._wrappedGetters = options.getters;
+
+    // 定义computed = {}
+    const computed = {}
+    this.getters = {}
+
+    const store = this
+    Object.keys(this._wrappedGetters).forEach(key => {
+      // 获取用户定义的getters
+      const fn = store._wrappedGetters[key];
+      // 转换为computed可以使用的无参数格式
+      computed[key] = function() {
+        return fn(store.state)
+      }
+      // 为getters定义只读属性
+      Object.defineProperties(store.getters, key, {
+        get: () => store._vm[key]
+      })
+    })
     // 创建响应式的state
     // this.$store.state.counter
     this._vm = new _Vue({
