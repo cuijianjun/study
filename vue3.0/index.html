@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>practice 3</title>
+  <title>practice 4</title>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
 
@@ -13,7 +13,7 @@
   <div id="root"></div>
 </body>
 <script>
-  Vue.createApp({
+  const app = Vue.createApp({
     data() {
       return {
         inputValue: '',
@@ -32,13 +32,23 @@
       <input v-model="inputValue"/>
       <button v-on:click="handleBtnClick">增加</button>
       <ul>
-      <li v-for="(item, index) of list">
-        {{item}} {{index}}
-      </li>
+          <todo-item v-for="(item, index) of list" v-bind:content="item"></todo-item>
     </ul>
       </div>
     `
-  }).mount('#root');
+  });
+
+  app.component('todo-item', {
+    props: ['content'],
+    data() {
+      return {
+        item: 'hello dell'
+      }
+    },
+    template: '<li>{{content}}</li>'
+  })
+
+  app.mount('#root');
 </script>
 
 </html>
