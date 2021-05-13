@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>practice 4</title>
+  <title>practice 6</title>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
 
@@ -13,14 +13,42 @@
   <div id="root"></div>
 </body>
 <script>
-  // createApp创建一个Vue应用，储存到app变量中
-  // 传入的参数表示，这个应用的最外层组件，应该如何展示
-  // mvvm 设计模式，
+  
   const app = Vue.createApp({
     data() {
       return {
         message: 'hello world'
       }
+    },
+    // 在实例生成之前自动执行的函数
+    beforeCreate() {
+      console.log('beforeCreate');
+    },
+    // 在实例生成之后 自动执行的函数
+    create() {
+      console.log('create');
+    },
+    // 在组件内容被渲染到页面之前自动执行的函数
+    beforeMount() {
+      console.log('beforeMount');
+    },
+    // 在组件内容被渲染之后执行的函数
+    mounted() {
+      console.log('mounted');
+    },
+    beforeUpdate() {
+      console.log('beforeUpdate');
+    },
+    updated() {
+      console.log(document.getElementById('root').innerHTML, 'updated');
+    },
+    // 当VUE 应用失效时，自动执行的函数
+    beforeUnMount() {
+      console.log(document.getElementById('root').innerHTML, 'beforeUnMount');
+    },
+    // 当Vue应用失效时，且dom完全销毁之后，自动执行的函数
+    unmounted() {
+      console.log('unmounted');
     },
     template: "<div>{{message}}</div>"
   });
