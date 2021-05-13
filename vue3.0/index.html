@@ -13,41 +13,17 @@
   <div id="root"></div>
 </body>
 <script>
+  // createApp创建一个Vue应用，储存到app变量中
+  // 传入的参数表示，这个应用的最外层组件，应该如何展示
+  // mvvm 设计模式，
   const app = Vue.createApp({
     data() {
       return {
-        inputValue: '',
-        list: []
+        message: 'hello world'
       }
     },
-    methods: {
-      handleBtnClick() {
-        this.list.push(this.inputValue);
-        this.inputValue = ''
-      }
-    },
-    template:
-      `
-    <div>
-      <input v-model="inputValue"/>
-      <button v-on:click="handleBtnClick">增加</button>
-      <ul>
-          <todo-item v-for="(item, index) of list" v-bind:content="item"></todo-item>
-    </ul>
-      </div>
-    `
+    template: "<div>{{message}}</div>"
   });
-
-  app.component('todo-item', {
-    props: ['content'],
-    data() {
-      return {
-        item: 'hello dell'
-      }
-    },
-    template: '<li>{{content}}</li>'
-  })
-
   app.mount('#root');
 </script>
 
