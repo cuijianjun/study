@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>practice 7</title>
+  <title>practice 8</title>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
 
@@ -18,20 +18,33 @@
     data() {
       return {
         message: 'hello world',
-        show: false,
-        name: 'title1',
-        event: 'click'
+        count: 2,
+        price: 5,
+        newTotal: 10
+      }
+    },
+    watch: {
+      price(current, prev) {
+        this.newTotal = current * this,count;
+      }
+    },
+    computed: {
+      // 当计算属性依赖的内容发生变更时，才会重新计算
+      total() {
+        return this.count * this.price
       }
     },
     methods: {
-      handleClick() {
-        alert('click')
+      formatString(sting) {
+        return sting.toUpperCase()
+      },
+      // 只要页面重新渲染，才会重新计算
+      getTotal() {
+        return Date.now();
       }
     },
     template: `
-    <form action="https://www.baidu.com" @click.prevent='handleClick'>
-        <button type="submit">提交</button>
-      </form>
+    <div>{{message}}{{getTotal()}}</div>
     `
   });
   app.mount('#root');
