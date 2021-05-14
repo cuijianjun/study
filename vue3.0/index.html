@@ -13,40 +13,31 @@
   <div id="root"></div>
 </body>
 <script>
-  
+
   const app = Vue.createApp({
     data() {
       return {
-        message: 'hello world',
-        count: 2,
-        price: 5,
-        newTotal: 10
-      }
-    },
-    watch: {
-      price(current, prev) {
-        this.newTotal = current * this,count;
-      }
-    },
-    computed: {
-      // 当计算属性依赖的内容发生变更时，才会重新计算
-      total() {
-        return this.count * this.price
-      }
-    },
-    methods: {
-      formatString(sting) {
-        return sting.toUpperCase()
-      },
-      // 只要页面重新渲染，才会重新计算
-      getTotal() {
-        return Date.now();
+        classString: 'red',
+        classObject: {red: false, green: true},
+        classArray: ['red', 'green', {brown: true} ],
+        styleString: 'color: yellow;',
+        styleObject: {
+          color: 'orange',
+          background: 'yellow'
+        }
       }
     },
     template: `
-    <div>{{message}}{{getTotal()}}</div>
+    <div :class="classArray">hello world</div>
+    <demo class='green'/>
     `
   });
+  app.component('demo', {
+    template: `
+    <div :class="$attr.class">single</div>
+    <div :class="$attr.class">single</div>
+    `
+  })
   app.mount('#root');
 </script>
 
