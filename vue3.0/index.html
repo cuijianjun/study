@@ -17,40 +17,23 @@
   const app = Vue.createApp({
     data() {
       return {
-        message: 'hello world'
+        message: 'hello world',
+        show: false,
+        name: 'title1',
+        event: 'click'
       }
     },
-    // 在实例生成之前自动执行的函数
-    beforeCreate() {
-      console.log('beforeCreate');
+    methods: {
+      handleClick() {
+        alert('click')
+      }
     },
-    // 在实例生成之后 自动执行的函数
-    create() {
-      console.log('create');
-    },
-    // 在组件内容被渲染到页面之前自动执行的函数
-    beforeMount() {
-      console.log('beforeMount');
-    },
-    // 在组件内容被渲染之后执行的函数
-    mounted() {
-      console.log('mounted');
-    },
-    beforeUpdate() {
-      console.log('beforeUpdate');
-    },
-    updated() {
-      console.log(document.getElementById('root').innerHTML, 'updated');
-    },
-    // 当VUE 应用失效时，自动执行的函数
-    beforeUnMount() {
-      console.log(document.getElementById('root').innerHTML, 'beforeUnMount');
-    },
-    // 当Vue应用失效时，且dom完全销毁之后，自动执行的函数
-    unmounted() {
-      console.log('unmounted');
-    },
-    template: "<div>{{message}}</div>"
+    template: `
+    <div 
+      @[event]="handleClick"
+      :[name]="message"
+    >{{message}}</div>
+    `
   });
   app.mount('#root');
 </script>
