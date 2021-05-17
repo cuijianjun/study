@@ -13,21 +13,27 @@
   <div id="root"></div>
 </body>
 <script>
-  // input textarea checkbox radio select
-  // 修饰符 lazy number trim
-  const app = Vue.createApp({
+  // 组件具备复用性
+  // 全局组件 只要定义了 处处可以使用 性能不高 使用时起简单
+  const counter = {
     data() {
       return {
-        message: 'world'
+        count: 1
       }
+    },
+    template: `<div @click="count +=1">{{count}} </div>`
+  }
+  const app = Vue.createApp({
+    components: {
+      counter,
     },
     template: `
       <div>
-        {{message}}
-        <input type="checkbox" v-model.lazy="message" />
+          <counter/>
         </div>
     `
   });
+
   app.mount('#root');
 </script>
 
