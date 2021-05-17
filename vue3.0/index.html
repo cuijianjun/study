@@ -17,19 +17,18 @@
   const app = Vue.createApp({
     data() {
       return {
-        classString: 'red',
-        classObject: {red: false, green: true},
-        classArray: ['red', 'green', {brown: true} ],
-        styleString: 'color: yellow;',
-        styleObject: {
-          color: 'orange',
-          background: 'yellow'
-        }
+        show: false,
+        conditionOne: false,
+        conditionTwo: true
       }
     },
     template: `
-    <div :class="classArray">hello world</div>
-    <demo class='green'/>
+    <div v-if="show">hello world</div>
+
+    <div v-if="conditionOne">if</div>
+    <div v-else-if="conditionTwo">else if</div>
+    
+    <div v-else="show">else</div>
     `
   });
   app.component('demo', {
