@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>practice 8</title>
+  <title>practice 12</title>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
 
@@ -13,46 +13,22 @@
   <div id="root"></div>
 </body>
 <script>
-  // 事件修饰符： stop prevent capture self once passive
-  // 按键修饰符: enter tab delete esc up down left right 
-  // 鼠标修饰符： left right middle
-  // 精确修饰符: exact
+  // input textarea
   const app = Vue.createApp({
     data() {
       return {
-        listArray: ['dell', 'lee', 'teacher'],
-        listObject: {
-          firstName: 'dell',
-          lastName: 'lee',
-          job: 'teacher'
-        }
+        message: false
       }
     },
-    methods: {
-      handleAddBtnClick() {
-        // 使用数据的变更函数 push， pop shift unshift splice sort reverse
-        this.listArray.unshift('hello');
-        // 直接替换数组
-        // this.listArray = ['bye']
-        // 直接更新数组的内容
-        this.listArray[1] = 'hello'
-      }
-    },
-    template: ``
-  });
-  app.component('demo', {
     template: `
-    <div>
-        <div 
-        v-for="(value,key, index) in listArray"
-        :key="index"
-        v-if="key !== 'lastName'"
-        >
-        {{value}} -- {{key}}
+      <div>
+        {{message}}
+        jack <input type="checkbox" v-model="message" value="jack"/>
+        dell <input type="checkbox" v-model="message" value="dell"/>
+        lee <input type="checkbox" v-model="message" value="lee"/>
         </div>
-      </div>
     `
-  })
+  });
   app.mount('#root');
 </script>
 
