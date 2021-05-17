@@ -17,15 +17,20 @@
   const app = Vue.createApp({
     data() {
       return {
-        message: false
+        message: [],
+        options: [
+          {text: "A", value: {value: "A"}},
+          {text: "B", value: {value: "B"}},
+          {text: "C", value: {value: "C"}}
+        ]
       }
     },
     template: `
       <div>
         {{message}}
-        jack <input type="checkbox" v-model="message" value="jack"/>
-        dell <input type="checkbox" v-model="message" value="dell"/>
-        lee <input type="checkbox" v-model="message" value="lee"/>
+        <select v-model="message" multiple>
+          <option v-for="item in options" :value="item.value">{{item.text}}</option>
+          </select>
         </div>
     `
   });
