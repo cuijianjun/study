@@ -15,6 +15,10 @@
 <script>
   // 组件具备复用性
   // 全局组件 只要定义了 处处可以使用 性能不高 使用时起简单
+  // v-bind="params"
+  // :content="params.content" :a="params.a" :b="params.b" :c="params.c"
+  // 属性传的时候，使用content-abc这种命名，接的时候 使用的contentABC命名
+  // 单向数据流的概念：子组件可以使用父组件传过来的数据 但是不能修改传递过来的数据
   const counter = {
     data() {
       return {
