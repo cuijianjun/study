@@ -13,7 +13,7 @@
   <div id="root"></div>
 </body>
 <script>
-  // 异步组件
+  // provide、inject
   
   const app = Vue.createApp({
     data() {
@@ -21,23 +21,24 @@
         count: 1
       }
     },
+    provide: {
+      count: 1
+    },
     template: `
       <div>
-        <common-item/>
-        <async-common-item/>
+        <child :count="count"/>
         </div>
     `
   });
 
-  app.component('async-common-item', Vue.defineAsyncComponent(() => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          template: `<div>this is an async component</div>`
-        })
-      }, 4000)
-    })
-  }))
+  app.component('child', {
+    template: `<child-child/>`
+  })
+  app.component('child-child', {
+    inject: ['count'],
+    template: `<child-child/>`
+  })
+
 
   app.mount('#root');
 </script>
