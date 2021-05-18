@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>practice 13</title>
+  <title>practice 14</title>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
 
@@ -13,30 +13,28 @@
   <div id="root"></div>
 </body>
 <script>
-  // 组件具备复用性
-  // 全局组件 只要定义了 处处可以使用 性能不高 使用时起简单
-  // v-bind="params"
-  // :content="params.content" :a="params.a" :b="params.b" :c="params.c"
-  // 属性传的时候，使用content-abc这种命名，接的时候 使用的contentABC命名
-  // 单向数据流的概念：子组件可以使用父组件传过来的数据 但是不能修改传递过来的数据
-  const counter = {
-    data() {
-      return {
-        count: 1
-      }
-    },
-    template: `<div @click="count +=1">{{count}} </div>`
-  }
+  // Non-prop 属性
+  
   const app = Vue.createApp({
-    components: {
-      counter,
-    },
     template: `
       <div>
-          <counter/>
+          <counter msg="hello" msg1="hello1"/>
         </div>
     `
   });
+
+  app.component('counter', {
+    // inheritAttrs: false
+    mounted() {
+      console.log(this.$attrs.msg);
+    },
+    template: 
+    `
+      <div :msg="$attrs.msg">Counter</div>
+      <div v-bind="$attrs">Counter</div>
+      <div :msg1="$attrs.msg1">Counter</div>
+    `
+  })
 
   app.mount('#root');
 </script>
