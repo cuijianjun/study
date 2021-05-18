@@ -16,23 +16,31 @@
   // Non-prop 属性
   
   const app = Vue.createApp({
+    data() {
+      return {
+        count: 1
+      }
+    },
     template: `
       <div>
-          <counter msg="hello" msg1="hello1"/>
+          <counter v-model:app="count"/>
         </div>
     `
   });
 
   app.component('counter', {
-    // inheritAttrs: false
+    props: ['app'],
     mounted() {
       console.log(this.$attrs.msg);
     },
+    methods: {
+      handleClick() {
+        this.$emit('update:app', this.app + 3)
+      }
+    },
     template: 
     `
-      <div :msg="$attrs.msg">Counter</div>
-      <div v-bind="$attrs">Counter</div>
-      <div :msg1="$attrs.msg1">Counter</div>
+      <div @click="handleClick">{{app}}</div>
     `
   })
 
