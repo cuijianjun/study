@@ -13,7 +13,7 @@
   <div id="root"></div>
 </body>
 <script>
-  // 作用于插槽
+  // 异步组件
   
   const app = Vue.createApp({
     data() {
@@ -22,29 +22,22 @@
       }
     },
     template: `
-      <list v-slot="slotProps">
-        <div>{{slotProps.item}}</div>
-        </list>
-
-        <list v-slot="{item}">
-        <div>{{item}}</div>
-        </list>
+      <div>
+        <common-item/>
+        <async-common-item/>
+        </div>
     `
   });
 
-  app.component('list', {
-    data() {
-      return {
-        list: [1,2,3]
-      }
-    },
-    template: 
-    `
-      <div >
-        <slot v-for="item in list" :item="item"></slot>
-        </div>
-    `
-  })
+  app.component('async-common-item', Vue.defineAsyncComponent(() => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          template: `<div>this is an async component</div>`
+        })
+      }, 4000)
+    })
+  }))
 
   app.mount('#root');
 </script>
