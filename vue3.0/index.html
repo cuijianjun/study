@@ -13,7 +13,7 @@
   <div id="root"></div>
 </body>
 <script>
-  // Non-prop 属性
+  // 作用于插槽
   
   const app = Vue.createApp({
     data() {
@@ -22,34 +22,27 @@
       }
     },
     template: `
-      <div>
-          <counter v-model:uppercase="count"/>
-        </div>
+      <list v-slot="slotProps">
+        <div>{{slotProps.item}}</div>
+        </list>
+
+        <list v-slot="{item}">
+        <div>{{item}}</div>
+        </list>
     `
   });
 
-  app.component('counter', {
-    props: {
-      "modelValue": String,
-      "modelModifiers": {
-        default: () => ({})
-      }
-    },
-    mounted() {
-      console.log(this.$attrs.msg);
-    },
-    methods: {
-      handleClick() {
-        let newValue = this.modelValue + 'b';
-        if (this.modelModifiers.uppercase) {
-          newValue = newValue.toUpperCase();
-        }
-        this.$emit('update:modelValue', newValue);
+  app.component('list', {
+    data() {
+      return {
+        list: [1,2,3]
       }
     },
     template: 
     `
-      <div @click="handleClick">{{app}}</div>
+      <div >
+        <slot v-for="item in list" :item="item"></slot>
+        </div>
     `
   })
 
