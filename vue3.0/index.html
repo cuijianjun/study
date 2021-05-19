@@ -5,35 +5,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>practice 15 </title>
+  <title>practice 24 </title>
   <style>
-    /* 动画 
-    @keyframes leftToRight {
-      0% {
-        transform: translateX(-100px);
+    .v-enter-from {
+      opacity: 0;}
+      .v-enter-active,
+      .v-leave-active{
+        transition: opacity 3s ease-out;
       }
-      50%{
-        transform: translateX(-50px);
+      .v-enter-to {
+        opacity: 1;
       }
-      0% {
-        transform: translateX(0px);
+      .v-leave-to {
+        opacity: 0;
       }
-    }
-    .animation {
-      animation: leftToRight 3s;
-    } */
-
-
-    /* 过渡
-    .transition {
-      transition: 3s background-color ease;
-    }
-    .blue {
-      background: blue;
-    }
-    .green{
-      background: green;
-    } */
   </style>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
@@ -42,27 +27,27 @@
   <div id="root"></div>
 </body>
 <script>
-  // 
+  // 单元素/单组件的入场出场动画
+
 
   const app = Vue.createApp({
     data() {
       return {
         animate: {
-          transition: true,
-          blue: true,
-          green: false
+          show: false
         }
       }
     },
     methods: {
       handleClick() {
-        this.animate.blue = !this.animate.blue;
-        this.animate.green = !this.animate.green;
+        this.show = !this.show;
       }
     },
     template: `
       <div>
-       <div :class="animate">hello world</div>
+       <transition>
+        <div v-if="show">hello world</div>
+        </transition>
        <button @click="handleClick">切换</button>
         </div>
     `
