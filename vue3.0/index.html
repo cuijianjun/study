@@ -7,24 +7,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>practice 24 </title>
   <style>
-    @keyframes shake
-     {
+    @keyframes shake {
       0% {
         transform: translateX(-100px);
-      }  
+      }
+
       50% {
         transform: translateX(-50%);
       }
+
       100% {
         transform: translateX(50px);
       }
     }
+
     .hello-leave-active {
-        animation: shake 3s;
-      }
-      .hello-enter-active {
-        animation: shake 3s;
-      }
+      animation: shake 3s;
+    }
+
+    .hello-enter-active {
+      animation: shake 3s;
+    }
   </style>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
@@ -50,7 +53,10 @@
     },
     template: `
       <div>
-       <transition name="hello">
+       <transition 
+          enter-active-class="animate_animated animate_backInDown"
+          leave-active-class="animate_animated animate_flash"
+       >
         <div v-if="show">hello world</div>
         </transition>
        <button @click="handleClick">切换</button>
