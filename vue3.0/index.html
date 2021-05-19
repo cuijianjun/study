@@ -35,16 +35,10 @@
 
 <body>
   <div id="root"></div>
+  
 </body>
 <script>
-  // 自定义指令 directive
-  const directives = {
-    focus: {
-      mounted(el) {
-        el.focus();
-      }
-    }
-  }
+  // teleport 传送门
 
 
   const app = Vue.createApp({
@@ -57,25 +51,14 @@
     },
     methods: {
       template: `
-      <div>
-        <div v-pos:left="distance" class="header">
-          <input v-focus/>
-        </div>
-       <button @click="handleClick">切换</button>
-        </div>
+      <div class="area">
+        <button @click="handleBtnClick">按钮</button>
+        <teleport to='#hello' >
+          <div class="mask" v-show="show"></div>
+        </teleport>
+      </div>
     `}
   });
-  app.directives('pos', (el, binding) => {
-    el.style[binding.arg] = (binding.value + 'px');
-  })
-  // app.directives('pos', {
-  //   mounted(el, binding) {
-  //     el.style.top = (binding.value + 'px');
-  //   },
-  //   updated(el, binding) {
-  //     el.style.top = (binding.value + 'px')
-  //   }
-  // })
 
   app.mount('#root');
 </script>
