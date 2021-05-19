@@ -33,10 +33,18 @@
   <div id="root"></div>
 </body>
 <script>
-  // 状态动画
+  // mixin混入
+  // 组件data methods 优先级高于 mixin data ,methods优先级
+  // 生命周期函数，先执行 mixin里面的，再执行组件里面的
+  // 自定义属性 组件中的属性优先级高于mixin属性的优先级
+
+const myMixin = {
+  number: 1
+}
 
 
   const app = Vue.createApp({
+    mixins: [myMixin],
     data() {
       return {
         number: 1,
@@ -63,6 +71,20 @@
         </div>
     `
   });
+  
+  app.config.optionMergeStrategies.number = (mixinVal, appValue) => {
+    return mixinVal || appValue
+  }
+
+// 全局mixin
+  app.mixin({
+    data() {
+      return {
+        number: 2,
+        count: 222
+      }
+    }
+  })
 
 
   app.mount('#root');
