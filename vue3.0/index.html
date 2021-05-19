@@ -7,24 +7,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>practice 24 </title>
   <style>
-   .v-enter-from {
-     opacity: 0;
-     transform: translateY(30px);
-   }
-   .v-enter-active {
-     transition: all .5s ease-in;
-   }
-   .v-enter-to {
-     opacity: 1;
-     transform: translateY(0);
-   }
-   .v-move{
-     transition: all 0.5s ease-in;
-   }
-   .list-item {
-     display: inline-block;
-     margin-right: 10px;
-   }
+    .v-enter-from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .v-enter-active {
+      transition: all .5s ease-in;
+    }
+
+    .v-enter-to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .v-move {
+      transition: all 0.5s ease-in;
+    }
+
+    .list-item {
+      display: inline-block;
+      margin-right: 10px;
+    }
   </style>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
@@ -33,18 +37,18 @@
   <div id="root"></div>
 </body>
 <script>
-  // mixin混入
-  // 组件data methods 优先级高于 mixin data ,methods优先级
-  // 生命周期函数，先执行 mixin里面的，再执行组件里面的
-  // 自定义属性 组件中的属性优先级高于mixin属性的优先级
-
-const myMixin = {
-  number: 1
-}
+  // 自定义指令 directive
+  const directives = {
+    focus: {
+      mounted(el){
+        el.focus();
+      }
+    }
+  }
 
 
   const app = Vue.createApp({
-    mixins: [myMixin],
+    directives,
     data() {
       return {
         number: 1,
@@ -52,40 +56,19 @@ const myMixin = {
       }
     },
     methods: {
-      handleClick() {
-        this.number = 10
-        if (this.animateNumber < this.number) {
-          const animation = setInterval(() => {
-            this.animateNumber += 1;
-            if (this.animateNumber === 10) {
-              clearInterval(animation)
-            }
-          }, 100);
-        }
-      }
-    },
-    template: `
+      template: `
       <div>
-        <span>{{animateNumber}}</span>
+        <input v-focus/>
        <button @click="handleClick">切换</button>
         </div>
-    `
-  });
-  
-  app.config.optionMergeStrategies.number = (mixinVal, appValue) => {
-    return mixinVal || appValue
-  }
+    `}
+    });
 
-// 全局mixin
-  app.mixin({
-    data() {
-      return {
-        number: 2,
-        count: 222
-      }
+  app.directives('focus', {
+    mounted(el){
+      el.focus();
     }
   })
-
 
   app.mount('#root');
 </script>
