@@ -40,7 +40,7 @@
   // 自定义指令 directive
   const directives = {
     focus: {
-      mounted(el){
+      mounted(el) {
         el.focus();
       }
     }
@@ -58,15 +58,22 @@
     methods: {
       template: `
       <div>
-        <input v-focus/>
+        <div v-pos="top" class="header">
+          <input v-focus/>
+        </div>
        <button @click="handleClick">切换</button>
         </div>
     `}
-    });
-
-  app.directives('focus', {
-    mounted(el){
-      el.focus();
+  });
+  app.directives('pos', (el, binding) => {
+    el.style.top = (binding.value + 'px');
+  })
+  app.directives('pos', {
+    mounted(el, binding) {
+      el.style.top = (binding.value + 'px');
+    },
+    updated(el, binding) {
+      el.style.top = (binding.value + 'px')
     }
   })
 
