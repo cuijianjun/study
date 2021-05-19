@@ -47,15 +47,33 @@
     },
     methods: {
       handleClick() {
-        console.log(this.show);
         this.show = !this.show;
+      },
+      handleBeforeEnter(el) {
+        el.style.color = "red"
+      },
+      handleEnterActive() {
+        const animation = setInterval(() => {
+          const color = el.style.color
+          if (color === 'red') {
+            el.style.color = 'green';
+          } else {
+            el.style.color = 'red'
+          }
+        }, 1000)
+        setTimeout(() => {
+          clearInterval(animation);
+          done();
+        }, 3000)
       }
     },
     template: `
       <div>
        <transition 
-          enter-active-class="animate_animated animate_backInDown"
-          leave-active-class="animate_animated animate_flash"
+          :css="false"
+          @before-enter="handleBeforeEnter"
+          @enter="handleEnterActive"
+          @after-enter="handleEnterEnd"
        >
         <div v-if="show">hello world</div>
         </transition>
