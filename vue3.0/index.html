@@ -7,18 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>practice 24 </title>
   <style>
-   .v-leave-to,
    .v-enter-from {
      opacity: 0;
+     transform: translateY(30px);
    }
-   .v-enter-active,
-   .v-leave-active {
-     transition: opacity 3s ease-in;
+   .v-enter-active {
+     transition: all .5s ease-in;
    }
-
-   .v-leave-from,
    .v-enter-to {
      opacity: 1;
+     transform: translateY(0);
+   }
+   .v-move{
+     transition: all 0.5s ease-in;
+   }
+   .list-item {
+     display: inline-block;
+     margin-right: 10px;
    }
   </style>
   <script src='https://unpkg.com/vue@next'></script>
@@ -28,43 +33,25 @@
   <div id="root"></div>
 </body>
 <script>
-  // 多个单元素标签之间的切换
-  // 多个单组件之间的切换
+  // 列表动画的实现
 
 
   const app = Vue.createApp({
     data() {
       return {
-        show: false
+        list :[1,2,3]
       }
     },
     methods: {
       handleClick() {
-        this.show = !this.show;
-      },
-      handleBeforeEnter(el) {
-        el.style.color = "red"
-      },
-      handleEnterActive() {
-        const animation = setInterval(() => {
-          const color = el.style.color
-          if (color === 'red') {
-            el.style.color = 'green';
-          } else {
-            el.style.color = 'red'
-          }
-        }, 1000)
-        setTimeout(() => {
-          clearInterval(animation);
-          done();
-        }, 3000)
+        this.list.unshift(this.list.length + 1);
       }
     },
     template: `
       <div>
-       <transition mode="out-in"  appear>
-        <component :is="component"/>
-        </transition>
+       <transition-group>
+        <span class="list-item" v-for="item in list" :key="item">{{item}}</span>
+        </transition-group>
        <button @click="handleClick">切换</button>
         </div>
     `
