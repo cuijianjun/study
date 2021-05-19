@@ -38,27 +38,24 @@
   
 </body>
 <script>
-  // teleport 传送门
-
+  // render function
+  // template -> render -> vnode —> 真实DOM -> 展示到页面上
 
   const app = Vue.createApp({
-    directives,
-    data() {
-      return {
-        number: 1,
-        animateNumber: 1
-      }
-    },
-    methods: {
-      template: `
-      <div class="area">
-        <button @click="handleBtnClick">按钮</button>
-        <teleport to='#hello' >
-          <div class="mask" v-show="show"></div>
-        </teleport>
-      </div>
-    `}
+    template: `
+      <my-title :level="2">
+        hello dell
+        </my-title>
+    `
   });
+
+  app.component('my-title', {
+    props: ['level'],
+    render() {
+      const {h} = Vue;
+      return h('h' + this.level, {}, this.$slots.default())
+    }
+  })
 
   app.mount('#root');
 </script>
