@@ -7,17 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>practice 24 </title>
   <style>
-    .v-enter-from {
-      opacity: 0;}
-      .v-enter-active,
-      .v-leave-active{
-        transition: opacity 3s ease-out;
+    @keyframes shake
+     {
+      0% {
+        transform: translateX(-100px);
+      }  
+      50% {
+        transform: translateX(-50%);
       }
-      .v-enter-to {
-        opacity: 1;
+      100% {
+        transform: translateX(50px);
       }
-      .v-leave-to {
-        opacity: 0;
+    }
+    .hello-leave-active {
+        animation: shake 3s;
+      }
+      .hello-enter-active {
+        animation: shake 3s;
       }
   </style>
   <script src='https://unpkg.com/vue@next'></script>
@@ -33,19 +39,18 @@
   const app = Vue.createApp({
     data() {
       return {
-        animate: {
-          show: false
-        }
+        show: false
       }
     },
     methods: {
       handleClick() {
+        console.log(this.show);
         this.show = !this.show;
       }
     },
     template: `
       <div>
-       <transition>
+       <transition name="hello">
         <div v-if="show">hello world</div>
         </transition>
        <button @click="handleClick">切换</button>
