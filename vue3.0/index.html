@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>practice 15 </title>
   <style>
+    /* 动画 
     @keyframes leftToRight {
       0% {
         transform: translateX(-100px);
@@ -20,7 +21,19 @@
     }
     .animation {
       animation: leftToRight 3s;
+    } */
+
+
+    /* 过渡
+    .transition {
+      transition: 3s background-color ease;
     }
+    .blue {
+      background: blue;
+    }
+    .green{
+      background: green;
+    } */
   </style>
   <script src='https://unpkg.com/vue@next'></script>
 </head>
@@ -35,13 +48,16 @@
     data() {
       return {
         animate: {
-          animation : false
+          transition: true,
+          blue: true,
+          green: false
         }
       }
     },
     methods: {
       handleClick() {
-        this.animate.animation = !this.animate.animation;
+        this.animate.blue = !this.animate.blue;
+        this.animate.green = !this.animate.green;
       }
     },
     template: `
