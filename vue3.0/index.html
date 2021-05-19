@@ -58,7 +58,7 @@
     methods: {
       template: `
       <div>
-        <div v-pos="top" class="header">
+        <div v-pos:left="distance" class="header">
           <input v-focus/>
         </div>
        <button @click="handleClick">切换</button>
@@ -66,16 +66,16 @@
     `}
   });
   app.directives('pos', (el, binding) => {
-    el.style.top = (binding.value + 'px');
+    el.style[binding.arg] = (binding.value + 'px');
   })
-  app.directives('pos', {
-    mounted(el, binding) {
-      el.style.top = (binding.value + 'px');
-    },
-    updated(el, binding) {
-      el.style.top = (binding.value + 'px')
-    }
-  })
+  // app.directives('pos', {
+  //   mounted(el, binding) {
+  //     el.style.top = (binding.value + 'px');
+  //   },
+  //   updated(el, binding) {
+  //     el.style.top = (binding.value + 'px')
+  //   }
+  // })
 
   app.mount('#root');
 </script>
