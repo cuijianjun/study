@@ -33,25 +33,32 @@
   <div id="root"></div>
 </body>
 <script>
-  // 列表动画的实现
+  // 状态动画
 
 
   const app = Vue.createApp({
     data() {
       return {
-        list :[1,2,3]
+        number: 1,
+        animateNumber: 1
       }
     },
     methods: {
       handleClick() {
-        this.list.unshift(this.list.length + 1);
+        this.number = 10
+        if (this.animateNumber < this.number) {
+          const animation = setInterval(() => {
+            this.animateNumber += 1;
+            if (this.animateNumber === 10) {
+              clearInterval(animation)
+            }
+          }, 100);
+        }
       }
     },
     template: `
       <div>
-       <transition-group>
-        <span class="list-item" v-for="item in list" :key="item">{{item}}</span>
-        </transition-group>
+        <span>{{animateNumber}}</span>
        <button @click="handleClick">切换</button>
         </div>
     `
