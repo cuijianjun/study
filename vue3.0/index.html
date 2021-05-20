@@ -41,24 +41,12 @@
 
  const app = Vue.createApp({
    setup() {
-     const {ref, computed} = Vue;
-     const count = ref(0);
-     const handleClick = () => {
-       count.value += 1;
-     }
-
-     const countAddFive = computed({
-       get: () => {
-         return count.value + 5
-       },
-       set: () => {
-         return count.value = 10
-       }
-     })
-
-
-     const countAddFive = computed(() => {
-       return count.value + 5;
+     const {reactive, watch} = Vue;
+     const name = ref('dell')
+     // 具备一定的惰性 lazy 首次进入页面不会监听
+     // 参数可以拿到原始和当前的值
+     watch(name, (currentValue, prevValue) => {
+       console.log(currentValue, prevValue);
      })
 
 
