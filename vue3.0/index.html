@@ -39,38 +39,30 @@
 </body>
 <script>
 
- // 关于list操作进行封装
- const listRelativeEffect = () => {
-   const {reactive} = Vue;
-   const list = reactive([]);
-   const addItemToList = (item) => {
-     list.push(item);
-   }
-   return {list, addItemToList}
- }
-// 关于inputValue操作的内容进行封装
- const inputRelativeEffect = () => {
-   const {ref} = Vue;
-   const inputValue = ref('');
-   const handleInputValueChange = (e) => {
-     inputValue.value = e.target.value
-   }
-
-   return {
-     inputValue,
-     handleInputValueChange
-   }
- }
-
  const app = Vue.createApp({
    setup() {
-     // 流程调度中转
-     const {list, addItemToList} = listRelativeEffect();
-     const {inputValue, handleInputValueChange} = inputRelativeEffect();
-     return {
-       list,addItemToList,
-       inputValue, handleInputValueChange
+     const {ref, computed} = Vue;
+     const count = ref(0);
+     const handleClick = () => {
+       count.value += 1;
      }
+
+     const countAddFive = computed({
+       get: () => {
+         return count.value + 5
+       },
+       set: () => {
+         return count.value = 10
+       }
+     })
+
+
+     const countAddFive = computed(() => {
+       return count.value + 5;
+     })
+
+
+     return {count, countAddFive, handleClick}
    }
  })
 
