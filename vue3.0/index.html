@@ -38,28 +38,21 @@
 
 </body>
 <script>
-  // 对数据做校验的插件
-
+  // ref, reactive 响应式的引用
+  // 原理，通过proxy对数据进行封装，当数据变化时，触发模板等内容的更新
+  // ref 处理基础类型的数据
   const app = Vue.createApp({
     template: `
-      <div>name: {{name}}, age: {{age}}</div>
+      <div>{{name}}</div>
     `,
-    methods: {
-      test() {
-        console.log(this.$options.setup());
-      }
-    },
-    mounted() {
-      this.test();
-    },
     // created 实例被完全初始化之前
     setup(props, context) {
-      return {
-        name: 'dell',
-        handleClick: () => {
-          alert(123)
-        }
-      }
+      const {ref} = Vue;
+      // proxy, 'dell' 变成 proxy({value: 'dell'}) 这样的一个响应式引用
+      let name  = ref('dell');
+      setTimeout(() => {
+        name.value = "lee"
+      }, 2000)
     }
   });
 
