@@ -39,26 +39,40 @@
 </body>
 <script>
 
-  const app = Vue.createApp({
-    template: `
-      <div>{{data.name}}</div>
-    `,
-  });
+ // 关于list操作进行封装
+ const listRelativeEffect = () => {
+   const {reactive} = Vue;
+   const list = reactive([]);
+   const addItemToList = (item) => {
+     list.push(item);
+   }
+   return {list, addItemToList}
+ }
+// 关于inputValue操作的内容进行封装
+ const inputRelativeEffect = () => {
+   const {ref} = Vue;
+   const inputValue = ref('');
+   const handleInputValueChange = (e) => {
+     inputValue.value = e.target.value
+   }
 
-  app.component('child', {
-    template: `
-      <div @click="handleClick">child</div>
-    `,
-    setup(props, context) {
-      const { h } = Vue;
-      const { attrs, slots, emit } = context;
-      // console.log(attrs.app); //None-props 属性
-      // return () => h('div', {}, slots.default())
-      function handleClick() { emit('change'); }
-      return { handleClick }
-    }
-  })
+   return {
+     inputValue,
+     handleInputValueChange
+   }
+ }
 
+ const app = Vue.createApp({
+   setup() {
+     // 流程调度中转
+     const {list, addItemToList} = listRelativeEffect();
+     const {inputValue, handleInputValueChange} = inputRelativeEffect();
+     return {
+       list,addItemToList,
+       inputValue, handleInputValueChange
+     }
+   }
+ })
 
 
   app.mount('#root');
