@@ -42,10 +42,10 @@
  const app = Vue.createApp({
    setup() {
      const {reactive, watch} = Vue;
-     const name = ref('dell')
+     const nameObj = reactive({name: 'dell'})
      // 具备一定的惰性 lazy 首次进入页面不会监听
      // 参数可以拿到原始和当前的值
-     watch(name, (currentValue, prevValue) => {
+     watch(() => nameObj.name, (currentValue, prevValue) => {
        console.log(currentValue, prevValue);
      })
 
