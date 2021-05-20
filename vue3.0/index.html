@@ -38,24 +38,38 @@
   
 </body>
 <script>
-  // render function
-  // template -> render -> vnode —> 真实DOM -> 展示到页面上
+  // plugin 插件，也是把通用性的功能封装起来
+  const myPlugin = {
+    install(app, options) {
+      app.provide('name', 'hello dell');
+      app.directives('focus', {
+        mounted(el) {
+          el.focus();
+        },
+      }),
+      app.mixin({
+        mounted() {
+          console.log('mixin');
+        },
+      })
+      app.config.globalProperties.$sayHello= "hello world" 
+    }
+  }
 
   const app = Vue.createApp({
     template: `
-      <my-title :level="2">
-        hello dell
-        </my-title>
+      <my-title/>
     `
   });
 
   app.component('my-title', {
-    props: ['level'],
-    render() {
-      const {h} = Vue;
-      return h('h' + this.level, {}, this.$slots.default())
-    }
+    inject: ['name'],
+    mounted() {
+      console.log(this.$sayHello);
+    },
+    template: `<div> {{name}}hello world</div>`
   })
+  app.use(myPlugin, {name: 'dell'})
 
   app.mount('#root');
 </script>
