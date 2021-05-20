@@ -54,15 +54,16 @@
       //   name.value = "lee"
       // }, 2000)
 
-      const { reactive } = Vue;
+      const { reactive, toRefs } = Vue;
       // proxy, { name: 'dell' } 变成 proxy({ name: 'dell' }) 这样的一个响应式引用
-      const nameObj = reactive([123]);
+      const nameObj = reactive({name: 'dell'});
       const copyNameObj = readonly(nameObj);
       setTimeout(() => {
-        nameObj[0] = 456
-        copyNameObj[0] = 456
+        nameObj.name = 'lee'
       }, 2000)
-      return { nameObj, copyNameObj }
+      // toRefs proxy({name: 'dell'}), {name: proxy({value: dell})}
+      const {name} = toRefs(nameObj);
+      return {name}
     }
   });
 
