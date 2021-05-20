@@ -47,16 +47,23 @@
     `,
     // created 实例被完全初始化之前
     setup(props, context) {
-      const {ref} = Vue;
-      // proxy, 'dell' 变成 proxy({value: 'dell'}) 这样的一个响应式引用
-      let name  = ref('dell');
+      // const {ref} = Vue;
+      // // proxy, 'dell' 变成 proxy({value: 'dell'}) 这样的一个响应式引用
+      // let name  = ref('dell');
+      // setTimeout(() => {
+      //   name.value = "lee"
+      // }, 2000)
+
+      const { reactive } = Vue;
+      const nameObj = reactive({ name: 'dell' });
       setTimeout(() => {
-        name.value = "lee"
+        nameObj.name = 'lee'
       }, 2000)
+      return { nameObj }
     }
   });
 
-  
+
 
   app.mount('#root');
 </script>
