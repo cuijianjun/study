@@ -35,41 +35,46 @@
 
 <body>
   <div id="root"></div>
-  
+
 </body>
 <script>
-  // plugin 插件，也是把通用性的功能封装起来
-  const myPlugin = {
-    install(app, options) {
-      app.provide('name', 'hello dell');
-      app.directives('focus', {
-        mounted(el) {
-          el.focus();
-        },
-      }),
-      app.mixin({
-        mounted() {
-          console.log('mixin');
-        },
-      })
-      app.config.globalProperties.$sayHello= "hello world" 
-    }
-  }
+  // 对数据做校验的插件
 
   const app = Vue.createApp({
+    data() {
+      return {
+        name: 'dell',
+        age: 23
+      }
+    },
+    rules: {
+      age: {
+        validate: age => age > 25,
+        message: 'too yong, to simple'
+      }
+    },
     template: `
-      <my-title/>
+      <div>name: {{name}}, age: {{age}}</div>
     `
   });
 
-  app.component('my-title', {
-    inject: ['name'],
-    mounted() {
-      console.log(this.$sayHello);
-    },
-    template: `<div> {{name}}hello world</div>`
-  })
-  app.use(myPlugin, {name: 'dell'})
+  const validatorPlugin = (app, options) => {
+    app.mixin({
+      created() {
+        for (const key in this.$options.rules) {
+          const item = this.$options.rules[key];
+          this.$watch(key, (value) => {
+            const result = item.validate(value);
+            if (!result) {
+              console.log(item.message);
+            }
+          })
+        }
+      }
+    })
+  }
+
+  app.use(validatorPlugin)
 
   app.mount('#root');
 </script>
