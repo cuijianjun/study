@@ -38,47 +38,38 @@
 
 </body>
 <script>
-
+// provide inject
   const app = Vue.createApp({
     setup() {
-      // beforeMount => onBeforeMount
-      // mounted => onMounted
-      // beforeUpdate => onBeforeUpdate
-      // beforeUnMount => onBeforeUnmounted
-      const {
-        ref,
-        onBeforeMount,
-        onMounted,
-        onBeforeUpdate,
-        onUpdated
-      } = Vue;
-
-      const name = ref('dell')
-      onBeforeMount(() => {
-        console.log('onBeforeMount');
-      })
-
-      onMounted(() => {
-        console.log("onMounted");
-      })
-
-
-      onBeforeUpdate(() => {
-        console.log('onBeforeUpdate');
-      })
-
-      onUpdated(() => {
-        console.log("onUpdated");
-      })
-      onRenderTracked(() => {
-        console.log("onRenderTracked");
-      })
-
-      onRenderTriggered(() => {
-        console.log("onRenderTriggered");
+     
+      const {provide, ref, readonly} = Vue;
+      const name = ref('dell');
+      provide("name", readonly(name));
+      provide("changeName", (value) => {
+        name.value = value;
       })
       return {}
-    }
+    },
+
+    template: 
+    `
+    <div @click="handleClick">
+      {{name}}
+      </div>
+    `
+  })
+
+  app.component('child', {
+    setup() {
+      const {inject} = Vue;
+      const name = inject('name');
+      const changeName = inject("changeName")
+      const handleClick =() => {
+        changeName("lee")
+      }
+      return {name, handleClick}
+    },
+    template: `<div>{{name}}</div>`
   })
 
 
