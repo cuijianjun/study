@@ -38,18 +38,17 @@
 
 </body>
 <script>
-import {reactive, ref} from 'vue';
-export default {
-  name: "App",
-  components: {ListItem},
+import {useStore} from 'vuex'
+export default{
+  name: "Home",
   setup() {
-    const inputValue = ref("");
-    const list = reactive([]);
-    const handleAddItem = () => {
-      list.push(inputValue.value);
-      inputValue.value = '';
+    const store = useStore();
+    const {name} = toRefs(store.state);
+    const handleClick = () => {
+      // store.dispatch("getData")
+      store.commit("changeName")
     }
-    return {handleAddItem, inputValue, list}
+    return {name, handleClick}
   }
 }
 </script>
