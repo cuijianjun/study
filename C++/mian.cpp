@@ -1,6 +1,12 @@
-#include <iostream>
+#include "stdafx.h"
 
-int main(int argc, char **argv) {
-    std::cout<<"hello world"<<std::endl;
-    return 0;
+void main(void) {
+    char a[10] = "a";
+    short int s = 97;
+    int m = 97;
+    long int n = 97;
+    double d = 97.0;
+    long double k = 97.0;
+    bool b = true;
+    wchar_t w[10] = L"a";
 }
