@@ -1,12 +1,16 @@
-#include "stdafx.h"
+#include "stdafx.h";
 
-void main(void) {
-    char a[10] = "a";
-    short int s = 97;
-    int m = 97;
-    long int n = 97;
-    double d = 97.0;
-    long double k = 97.0;
-    bool b = true;
-    wchar_t w[10] = L"a";
+void main(void)
+{
+    int A = 10;
+    int B = 20;
+    cout << A + B << endl;
+    cout << A - B << endl;
+    cout << A * B << endl;
+    cout << B / A << endl;
+    cout << 15 / A << endl;
+    cout << 15.0 / A << endl;
+    cout << B % A << endl;
+    cout << ++A << endl;
+    cout << --A << endl;
 }
