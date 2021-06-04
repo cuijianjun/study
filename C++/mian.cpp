@@ -2,15 +2,10 @@
 
 void main(void)
 {
-    int A = 10;
-    int B = 20;
-    cout << A + B << endl;
-    cout << A - B << endl;
-    cout << A * B << endl;
-    cout << B / A << endl;
-    cout << 15 / A << endl;
-    cout << 15.0 / A << endl;
-    cout << B % A << endl;
-    cout << ++A << endl;
-    cout << --A << endl;
+    bool bA = false, bB = true;
+    cout < < (bA == true || bA != true) < < endl;
+    cout < < (bB == true || bB != true) < < endl;
+    // 德*摩根率
+    cout < < (!(bA || bB) == (!bA && !bB)) < < endl;
+    cout < < (!(bA && bB) == (!bA || !bB)) < < endl;
 }
