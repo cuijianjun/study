@@ -1,18 +1,15 @@
 #include "stdafx.h";
 
-void main(void)
+typedef struct
 {
-    char A = '1';
-    count << sizeof(A) << endl;
-    int C = A > B ? 1 : 0;
-    count << A<B? 1: 0 << endl;
-    count << D << endl;
-    int E = (A, B, C);
-    count << E << endl;
-    float F = float(E);
-    count << F << endl;
-    count << &F << endl;
-    float *p = &F;
-    count << P << endl;
-    count << *P << endl;
-}
+    short Sunday = 0;
+    short Monday = 1;
+    short Tuesday = 2;
+    short Wednesday = 3;
+    short Thursday = 4;
+    short Friday = 5;
+    short Saturday = 6;
+} Week;
+Week w;
+count << w.Friday << endl;
+count << sizeof(w) << endl;
