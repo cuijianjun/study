@@ -1,15 +1,10 @@
 #include "stdafx.h";
 
-typedef struct
-{
-    short Sunday = 0;
-    short Monday = 1;
-    short Tuesday = 2;
-    short Wednesday = 3;
-    short Thursday = 4;
-    short Friday = 5;
-    short Saturday = 6;
-} Week;
-Week w;
-count << w.Friday << endl;
-count << sizeof(w) << endl;
+int i1 = 0;
+int i2 = -1;
+int i3 = -2147483647;
+
+unsigned int u1 = 0;
+unsigned int u2 = 429467295;
+unsigned int u3 = 2147483648;
+unsigned int u4 = 2147483647;
