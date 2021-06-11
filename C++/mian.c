@@ -1,11 +1,16 @@
 #include <stdio.h>;
 
 int main() {
-  float a_float = 3.14f; // 6, 7~8 + -10^-37 ~10^37
-  printf("size of float: %d\n", sizeof(float));
-  double a_double = 3.14;
-  printf("size of double : %d\n", sizeof(double));
-  float lat = 39.90815f;
-  printf("%f", 39.908156f - lat);
+  // <type> <name>
+  int value;
+  // <type> <name> = <initialized value>
+  int value_init = 3;
+
+  value = 4;
+  value_init = 5;
+
+  printf("value: %d\n", value);
+  value_init = value;
+  printf("value");
   return 0;
 }
