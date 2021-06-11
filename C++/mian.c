@@ -1,22 +1,11 @@
 #include <stdio.h>;
 
 int main() {
-  // 字符集 ASCII
-  char a = 'a'; // 97
-  char char_1 = '1';
-  char char_0 = '0';
-
-  char i = 0; // \0, null
-  // 字面量 literal
-  // \n : new line
-  // \b: backspace
-  // \r:return
-  // \t: table
-
-  // Unicode CJK code point
-  // C95
-  wchar_t zhong = L"中";
-  wchar_t zhogn_hex = L'\u4E2D';
-  printf("中：%d\n", zhong);
-  printf("中： %d\n", zhogn_hex);
+  float a_float = 3.14f; // 6, 7~8 + -10^-37 ~10^37
+  printf("size of float: %d\n", sizeof(float));
+  double a_double = 3.14;
+  printf("size of double : %d\n", sizeof(double));
+  float lat = 39.90815f;
+  printf("%f", 39.908156f - lat);
+  return 0;
 }
