@@ -1,41 +1,64 @@
 #include <stdio.h>;
 
 int main() {
-  int first = 0;
-  int second;
-  int third;
-  // =
-  third = second = first;
+  _Bool is_enabled = true;
+  is_enabled = 10;
+  printf("is_enable:%d\n", is_enabled);
+  is_enabled = false;
+  bool is_visible = false;
 
-  int left, right;
-  left = 2;
-  right = 3;
-
-  int sum;
-  sum = left + right;
-  int diff = left - right;
-  int product = left * right; // 6
-  int quotient = left / right;
-  int remainder = left % right;
-
-  int quitent_1 = 100 / 30; //
-
-  int i = 1;
-  int j = i++;
-  int k = ++i;
-  printf("3>3:%d\n", 3 > 2);
-  printf("3>2 || 3< 2%d\n", 3 > 3 || 3 < 2);
-  int x = 2;
-  x * 2;
-  x << 1;
-
-  x / 2;
-  x >> 1;
-
-  x *= 2;
-  x /= 2;
-  x += 2;
-  x -= 2;
+  // if else 
+  /**
+   * if (<condition>){
+   *  ... true statement
+   * } else {
+   * ...false statement
+   * }
+   * 
+   * */
   
+  #define MAGIC_NUMBER = 10
+  int user_input;
+  printf("please input a number : \n");
+  scanf("%d", &user_input);
+  if (user_input > MAGIC_NUMBER) {
+    printf("Your number is bigger");
+  } else if (user_input < MAGIC_NUMBER) {
+    printf("Your number is smaller!")
+  } else {
+    printf("Yes! You got it!")
+  }
+
+  /*
+  *
+  switch(<cond>) {
+    case 0: {}
+    break;
+    case 1: {
+
+    }
+  }
+  */
+ #define ADD "+"
+ #define SUB "-"
+ #define MULTIPLY "*"
+ #define DIVIDE "/"
+ #define REM "%"
+  int left;
+  int right;
+  char operator;
+  printf("please input an expression:\n");
+  scanf("%d %c %d", &left, &operator, &right);
+  int result;
+  switch (operator)
+  {
+  case ADD:
+    result = left + right;
+    break;
+  case SUB;
+      result = left - right;
+      default:
+    break;
+  }
   return 0;
 }
