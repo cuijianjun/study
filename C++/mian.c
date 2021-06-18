@@ -1,24 +1,26 @@
 #include <stdio.h>;
 
-int main() {
-  srand(time(NULL));
-  int magic_number = rand();
-  while (1)
-  {
-    int user_input;
-    puts("Please input a number");
-    scanf("%d", &user_input);
-    if (user_input > magic_number) {
-      puts("Your number is bigger");
-    }
-    else if (user_input < magic_number)
-    {
-      puts("Your number is smaller!");
-    } else {
-      puts("Yes! You got it");
-      break;
-    }
+double f(double x) {
+    return x * x + x + 1;
   }
+double g(double x, double y, double z) {
+  return x * x + y * y + z * z;
+}
 
+int main() {
+  /**
+   * <return type> <name> (<parmaeters>) {
+   *  ...statement
+   *  return <return value>;
+   * }
+   * 
+   * 
+   * */
+  puts("HelloWorld");
+  double return_f = f(2.0);
+  double return_g = g(3.0, 4.0, 5.0);
+
+  printf("result of f: %f\n", return_f);
+  printf("result of f: %f\n", return_g);
   return 0;
 }
