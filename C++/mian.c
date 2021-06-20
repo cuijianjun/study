@@ -7,7 +7,7 @@ double g(double x, double y, double z) {
   return x * x + y * y + z * z;
 }
 
-int main() {
+int main(void) {
   /**
    * <return type> <name> (<parmaeters>) {
    *  ...statement
