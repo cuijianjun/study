@@ -1,43 +1,29 @@
 #include <stdio.h>;
 
-double f(double x) {
-    return x * x + x + 1;
+int global_var = 1;
+void LocalstaticVar(void) {
+  // 静态变量
+  // 1. 作用域全局，内存不会因函数退出而销毁
+  // 2. int 初始值默认为0
+  static int static_var;
+  // 自动变量
+  // 1. 函数，块作用域，随着函数的块退出而销毁
+  // 2. 没有默认的初值
+  int non_static_var;
+  printf("static var : %d\n", static_var++);
+  printf("non static var : %d\n", non_static_var++);
+}
+
+double Add(double a, double b);
+
+// proto scope
+double Sort(int size, int array[size]);
+
+int main(void){
+  // 自动变量
+  auto int value = 0;
+  {
+    auto int a = 0;
+    printf("%d\n", a);
   }
-double g(double x, double y, double z) {
-  return x * x + y * y + z * z;
-}
-
-int main(void) {
-  /**
-   * <return type> <name> (<parmaeters>) {
-   *  ...statement
-   *  return <return value>;
-   * }
-   * 
-   * 
-   * */
-  puts("HelloWorld");
-  double return_f = f(2.0);
-  double return_g = g(3.0, 4.0, 5.0);
-
-  printf("result of f: %f\n", return_f);
-  printf("result of f: %f\n", return_g);
-  return 0;
-}
-
-void EmptyParamList(void);
-
-/*
-  1. 函数名
-  2.函数的返回值类型，如果没写，默认为int
-  3. 函数参数列表，参数类型和参数顺序，参数形参顺序，参数形参名不重要
-*/
-
-int Add(int, int);
-
-int main2(void){
-  puts("");
-  EmptyParamList();
-  int result = Add(1, 2);
-  return 0;
 }
