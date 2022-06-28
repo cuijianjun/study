@@ -1,0 +1,2 @@
+infos = dir()
+print(infos)
