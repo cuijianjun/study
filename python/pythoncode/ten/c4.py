@@ -6,5 +6,6 @@ import re
 
 s = 'pyhton2 3 &\n23\r4234php'
 
-r = re.findall('[0-9]', s)
+# r = re.findall('[0-9]', s)
+r = re.findall('[a-z]{3,6}?', s)
 print(r)
