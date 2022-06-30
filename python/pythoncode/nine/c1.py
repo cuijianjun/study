@@ -8,6 +8,8 @@ class Student():
         # 初始化对象的属性
         self.name = name
         self.age = age
+        self.__age = age # 私有变量
+        self.__class__.sum += 1
         print('student')
     def print_file(self):
         print('name:' + self.name)
