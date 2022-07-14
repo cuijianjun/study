@@ -2,6 +2,9 @@
     学生信息库
 """
 
+from re import A
+
+
 student = {
     1: {
         'name': 'dewei',
@@ -92,5 +95,10 @@ def update_student(student_id, **kwargs):
     print('同学信息更新完毕')
 
 update_student(1, name='dewei.zhang',age=33, class_number="A", sex='boy')
+
+def get_user_by_id(student_id):
+    return student.get(student_id)
+
+print(get_user_by_id(3))
 
 
