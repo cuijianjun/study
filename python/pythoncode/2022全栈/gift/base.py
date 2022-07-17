@@ -3,6 +3,9 @@
     2. 读取userjson文件
     3.写入userjson文件（检测该用户是否存在），存在则不写入
 
+    1.role的修改
+    2.active的修改
+    3.delete_user
 
     username姓名
     role normal or admin
@@ -16,7 +19,8 @@ import os
 import time
 import json
 from common.utils import check_file, timestamp_to_string
-from common.error import UserExistsError
+from common.error import UserExistsError, RoleError
+from common.consts import ROLES
 
 class Base(object):
     def __init__(self,user_json, gift_json):
@@ -67,7 +71,22 @@ class Base(object):
         with open(self.user_json, 'w') as f:
             f.write(json_users)
 
+    def change_role(self, username,role):
+        users = self.__read_users()
+        user = users.get(username)
+        if not user:
+            return False
+        if role not in ROLES:
+            raise RoleError('not user role %s' % role)
 
+        user['role'] = role
+        user['update_time'] = time.time()
+        users[username] = user
+
+        json_data = json.dumps(users)
+        with open(self.user_json, 'w') as f:
+            f.write(json_data)
+        return True
 
 if __name__ == '__main__':
     gift_path = os.path.join(os.getcwd(), 'storage', 'gift.json')
@@ -75,4 +94,6 @@ if __name__ == '__main__':
     
     base = Base(user_json=user_path, gift_json=gift_path)
 
-    base.write_user(username='dewei', role='admin')
+    # base.write_user(username='dewei', role='admin')
+    result = base.change_role(username='dewei', role='normal')
+    print(result)

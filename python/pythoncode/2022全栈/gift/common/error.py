@@ -15,3 +15,7 @@ class NotFileError(Exception):
 class UserExistsError(Exception):
     def __init__(self,message):
         self.message = message
+
+class RoleError(Exception):
+    def __init__(self,message):
+        self.message = message
