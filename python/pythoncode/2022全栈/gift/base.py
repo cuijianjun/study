@@ -71,7 +71,7 @@ class Base(object):
         with open(self.user_json, 'w') as f:
             f.write(json_users)
 
-    def change_role(self, username,role):
+    def __change_role(self, username,role):
         users = self.__read_users()
         user = users.get(username)
         if not user:
@@ -87,6 +87,32 @@ class Base(object):
         with open(self.user_json, 'w') as f:
             f.write(json_data)
         return True
+    
+    def __change_active(self, username):
+        users = self.__read_users()
+        user = users.get(username)
+        if not user:
+            return False
+        
+        user['active'] = not user['active']
+        user['update_time'] = time.time()
+        user[username] = user
+        json_data = json.dumps(users)
+        with open(self.user_json, 'w') as f:
+            f.write(json_data)
+            return True
+    def delete_user(self, username):
+        users = self.__read_users()
+        user = users.get(username)
+        if not user:
+            return False
+        delete_user = users.pop(username)
+
+        json_data = json.dumps(users)
+        with open(self.user_json, 'w') as f:
+            f.write(json_data)
+        return delete_user
+
 
 if __name__ == '__main__':
     gift_path = os.path.join(os.getcwd(), 'storage', 'gift.json')
