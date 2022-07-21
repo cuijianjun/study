@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.http import HttpResponse
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -20,4 +21,25 @@ def hello_html(request):
             </body>
         </html>
     """
+    return HttpResponse(html)
+
+def article_list(request, month):
+    """
+    :param month: 今年某一个月的文章列表
+    """
+    return HttpResponse(f'article: {month}')
+def search(request):
+    """
+    GET 参数的获取
+    """
+    name = request.GET.get('name', '')
+    print(name)
+    return HttpResponse('查询成功')
+
+def render_str(request):
+    """
+        render_to_string 函数的使用
+    """
+    templ_name = 'index.html'
+    html = render_to_string(template_name=templ_name)
     return HttpResponse(html)
