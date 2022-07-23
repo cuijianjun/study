@@ -1,7 +1,9 @@
+from operator import imod
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.loader import render_to_string
+from django.views.generic import TemplateView
 
 # Create your views here.
 
@@ -86,3 +88,10 @@ def article_detail(request, article_id):
         # return HttpResponseRedirect(reverse('no_data_404'))
         return redirect('no_data_404')
     return HttpResponse(f'文章{article_id}的内容')
+
+def index(request):
+    return render(request, 'index.html')
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
