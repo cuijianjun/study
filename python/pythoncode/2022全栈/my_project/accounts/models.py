@@ -18,6 +18,7 @@ class User(CommomModel):
         ('1', '帅哥'),
         ('0', '美女')
     ), default='1')
+    
     age = models.PositiveIntegerField('年龄', default=0)
     username= models.CharField('用户名', max_length=64, unique=True)
     password = models.CharField('备注', max_length=256, null=True, blank=True)
@@ -26,7 +27,7 @@ class User(CommomModel):
 
     
     
-    
+    collect_ques = models.ManyToManyField('Question')
     class Meta:
         db_table = 'user'
 
@@ -36,4 +37,27 @@ class Manager(User):
         proxy = True
 class Profile(CommomModel):
     """用户详细信息"""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     nickname = models.CharField('昵称', max_length=64)
+
+class Question(CommomModel):
+    """问题"""
+    name = models.CharField('问题名称', max_length=64)
+
+class Answer(CommomModel):
+    """答案"""
+    question = models.ForeignKey(Question, on_delete=models.CASCADE,
+    related_name='answers',
+    verbose_name='关联的问题')
+    name = models.CharField('答案内容', max_length=256)
+
+class Classify(models.Model):
+    """
+        分类
+        1. 酒水
+            2. 啤酒
+            3. 白酒
+    """
+    name = models.CharField('名称', max_length=64)
+    parent = models.ForeignKey('self', related_name='children',
+    on_delete=models.CASCADE)
