@@ -61,3 +61,16 @@ class LoginHistory(models.Model):
     class Meta:
         db_table = 'accounts_login_history'
         ordering = ['-created_at']
+
+"""
+插入数据备注
+1. user_obj = User(username='zhangsan', password='123456', nickname='zhangsan')
+   user_obj.save()
+2. User.objects.create(username='lisi', password='123456')
+3. for i in range(100):
+   user_list.append(User(username=f'username_{i}', passward="123456"))
+   len(user_list)
+   User.objects.bulk_create(user_list)
+4. LoginHistory.objects.create(user=user_obj, username='zhangsan', login_type='web')
+    LoginHistory.objects.create(user_id=2, username='lisi', login_type='web')
+"""
