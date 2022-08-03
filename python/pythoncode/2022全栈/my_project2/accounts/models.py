@@ -1,7 +1,48 @@
 from django.db import models
 
+class CommonModel(models.Model):
+    """ 自定义模型的基类 """
+    created_at = models.DateTimeField('添加时间', auto_now_add=True)
+    updated_at = models.DateTimeField('最后修改时间', auto_now=True)
+
+    class Meta:
+        # 抽象类，这个类，并不会生成对应的数据库表
+        abstract = True
+
 # Create your models here.
 class User(models.Model):
     """用户基本信息"""
-    username = models.CharField('用户名', max_length=128)
-    password = 
+    USER_STATUS = (
+        (1, '正常'),
+        (0, '删除'),
+    )
+    username = models.CharField('用户名', max_length=128, unique=True)
+    password = models.CharField('密码', max_length=256)
+    nickname = models.CharField('用户昵称', max_length=256, null=True, blank=True)
+    avatar = models.ImageField('用户头像', upload_to='avatar', null=True, blank=True)
+    status = models.SmallIntegerField('用户状态', default=1, choices=USER_STATUS)
+    is_super = models.BooleanField('是否为超级用户', default=False)
+    created_at = models.DateTimeField('注册时间', auto_now_add=True)
+    updated_at = models.DateTimeField('更新时间', auto_now=True)
+
+    class Meta:
+        db_table = 'accounts_user' #修改表名称
+
+class UserProfile(CommonModel):
+    """ 用户详细信息 """
+    SEX_CHOICES = (
+        (0, '未知'),
+        (1, '男'),
+        (2, '女'),
+    )
+    user = models.OneToOneField(User, verbose_name='关联用户',
+                                related_name='profile',
+                                on_delete=models.CASCADE)
+    username = models.CharField('用户名', max_length=128, unique=True)
+    real_name = models.CharField('真实姓名', max_length=128, null=True, blank=True)
+    sex = models.SmallIntegerField('用户性别', default=0, choices=SEX_CHOICES)
+    maxim = models.CharField('用户格言', max_length=128, null=True, blank=True)
+    address = models.CharField('用户地址', max_length=128, null=True, blank=True)
+
+    class Meta:
+        db_table = 'accounts_user_profile'
