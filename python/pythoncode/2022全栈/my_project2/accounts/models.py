@@ -46,3 +46,18 @@ class UserProfile(CommonModel):
 
     class Meta:
         db_table = 'accounts_user_profile'
+
+class LoginHistory(models.Model):
+    """ 用户的登录历史 """
+    user = models.ForeignKey(User, related_name='login_history_list',
+                             on_delete=models.CASCADE,
+                             verbose_name='关联的用户')
+    username = models.CharField('用户名', max_length=128)
+    login_type = models.CharField('账号平台', max_length=128)
+    ip = models.CharField('IP地址', max_length=32, default='')
+    ua = models.CharField('登录来源', max_length=128, default='')
+    created_at = models.DateTimeField('登录时间', auto_now_add=True)
+
+    class Meta:
+        db_table = 'accounts_login_history'
+        ordering = ['-created_at']
