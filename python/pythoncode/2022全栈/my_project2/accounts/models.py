@@ -28,6 +28,9 @@ class User(models.Model):
     class Meta:
         db_table = 'accounts_user' #修改表名称
 
+    def __str__(self) -> str:
+        return f"User: {self.username}"
+
 class UserProfile(CommonModel):
     """ 用户详细信息 """
     SEX_CHOICES = (
