@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'medias')
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
