@@ -14,6 +14,7 @@ class SightListView(ListView):
 	"""
 	# 每页放5条数据
 	paginate_by = 5
+	page_kwarg = 'p'
 	
 	def get_queryset(self):
 		"""重写查询方法"""
