@@ -28,5 +28,3 @@ def slider_list(request):
 		})
 	# return HttpResponse('ok')
 	return http.JsonResponse(data)
-
-

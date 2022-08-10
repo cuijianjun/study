@@ -1,6 +1,5 @@
 from django import http
 from django.db.models import Q
-from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView
@@ -19,7 +18,7 @@ class SightListView(ListView):
 	def get_queryset(self):
 		"""重写查询方法"""
 		query = Q(is_valid=True)
-		#1. 热门景点
+		# 1. 热门景点
 		is_hot = self.request.GET.get('is_hot', None)
 		if is_hot:
 			query = query & Q(is_hot=True)
@@ -30,6 +29,7 @@ class SightListView(ListView):
 		# TODO 3. 景点名称搜索
 		queryset = Sight.objects.filter(query)
 		return queryset
+	
 	def render_to_response(self, context, **response_kwargs):
 		page_obj = context['page_obj']
 		data = {
@@ -43,12 +43,13 @@ class SightListView(ListView):
 		for item in page_obj.object_list:
 			data['objects'].append({
 				'id': item.id,
-                'name': item.name,
-                'main_img': item.main_img.url,
-                'score': item.score,
-                'province': item.province,
-                'city': item.city,
-                # TODO 评论数量暂时无法获取
-                'comment_count': 0
+				'name': item.name,
+				'main_img': item.main_img.url,
+				'score': item.score,
+				'province': item.province,
+				'min_price': item.min_price,
+				'city': item.city,
+				# TODO 评论数量暂时无法获取
+				'comment_count': 0
 			})
 		return http.JsonResponse(data)

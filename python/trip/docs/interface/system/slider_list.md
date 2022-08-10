@@ -1,12 +1,15 @@
 ## 首页轮播图的接口
 
 ### 请求地址
+
 /system/slider/list/
 
 ### 调用方式
+
 GET
 
 ### 请求参数
+
 <table>
   <thead>
    <tr>
@@ -27,6 +30,7 @@ GET
 </table>
 
 ### 返回结果
+
 ```
 {
   "meta": {
