@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'system.apps.SystemConfig'
+    # 系统模块
+    'system.apps.SystemConfig',
+    # 景点模块
+    'sight.apps.SightConfig'
 ]
 
 MIDDLEWARE = [
