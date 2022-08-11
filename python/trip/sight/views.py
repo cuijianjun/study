@@ -13,6 +13,7 @@ class SightListView(ListView):
 	"""
 	# 每页放5条数据
 	paginate_by = 5
+	# 默认带page参数 可修改
 	page_kwarg = 'p'
 	
 	def get_queryset(self):
