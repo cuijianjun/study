@@ -1,4 +1,4 @@
-from utils.serializers import BaseListPageSerializer
+from utils.serializers import BaseListPageSerializer, BaseSerializer
 
 
 class SightListSerializer(BaseListPageSerializer):
@@ -13,6 +13,28 @@ class SightListSerializer(BaseListPageSerializer):
             'province': obj.province,
             'min_price': obj.min_price,
             'city': obj.city,
+            # TODO 评论数量暂时无法获取
+            'comment_count': 0
+        }
+    
+
+class SightDetailSerializer(BaseSerializer):
+    """ 景点详情 """
+
+    def to_dict(self):
+        obj = self.obj
+        return {
+            'id': obj.id,
+            'name': obj.name,
+            'desc': obj.desc,
+            'img': obj.banner_img.url,
+            'content': obj.content,
+            'score': obj.score,
+            'min_price': obj.min_price,
+            'province': obj.province,
+            'city': obj.city,
+            'area': obj.area,
+            'town': obj.town,
             # TODO 评论数量暂时无法获取
             'comment_count': 0
         }

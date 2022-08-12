@@ -1,7 +1,7 @@
 from django import http
 from django.db.models import Q
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from sight import serializers
 from sight.models import Sight
@@ -56,3 +56,18 @@ class SightListView(ListView):
         #         'comment_count': 0
         #     })
         # return http.JsonResponse(data)
+        
+class SightDetailView(DetailView):
+    """2.2 景点详细信息"""
+    
+    def get_queryset(self):
+        # return Sight.object.filter(is_vaild=True)
+        return Sight.objects.all()
+    def render_to_response(self, context, **response_kwargs):
+        page_obj = context['object']
+        if page_obj is not None:
+            if not page_obj.is_valid:
+                return NotFoundJsonResponse()
+            data = serializers.SightDetailSerializer(page_obj).to_dict()
+            return http.JsonResponse(data)
+        return NotFoundJsonResponse()
