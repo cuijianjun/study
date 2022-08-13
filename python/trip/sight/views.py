@@ -86,7 +86,7 @@ class SightCommentListView(ListView):
 		sight_id = self.kwargs.get('pk', None)
 		sight = Sight.objects.filter(pk=sight_id, is_valid=True).first()
 		if sight:
-			# return Common.objects.filter(pk=sight_id, is_valid=True).first()
+			# return Common.objects.filter(pk=sight_id, sight=sight)
 			return sight.comments.filter(is_valid=True)
 		return Comment.objects.none()
 	
