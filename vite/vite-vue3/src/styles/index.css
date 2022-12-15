@@ -1,0 +1,8 @@
+@import url("@styles/others");
+:root{
+    --main-bg-color: red;
+}
+.root{
+    @console.error hello root
+    color: red;
+}
