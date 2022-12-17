@@ -16,7 +16,8 @@ createViteServer(
 
     app.get("*", async (req, res) => {
         
-        const template = fs.readFileSync("index.html", "utf-8");
+        let template = fs.readFileSync("index.html", "utf-8");
+        template = vite.transformIndexHtml(req.url, template);
         const render  = await vite.ssrLoadModule("/src/server-entry.jsx");
         const html = await render(req.url);
         const responseHtml = template.replace("<!-- APP_HTML -->", html);
