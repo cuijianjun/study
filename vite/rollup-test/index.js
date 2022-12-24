@@ -1,8 +1,8 @@
 import React from "react";
 console.log("hello rollup");
+React.createElement("div");
+// import {funA} from "./a"
 
-import {funA} from "./a"
+// funA();
 
-funA();
-
-console.log("Hello Rollup", React.useEffect()); 
+console.log("Hello Rollup"); 
