@@ -5,4 +5,4 @@ React.createElement("div");
 
 // funA();
 
-console.log("Hello Rollup"); 
+console.log("Hello Rollup");   
