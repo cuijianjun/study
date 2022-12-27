@@ -1,15 +1,37 @@
-export default (enforce?: 'pre'|'post') => {
-    return {
-        name: 'test',
-        enforce,
-        buildStart() {
-            console.log("buildStart", enforce);
+export default (enforce?: 'pre' | 'post') => {
+  return {
+    name: 'test',
+    config(userConfig) {
+      return {
+        resolve: {
+          alias: {
+            '@aaa': '/src/styles',
+          },
         },
-        resolved() {
-            console.log('resolveId', enforce);
-        },
-        load() { 
-            console.log('load', enforce);
-        }
+      }
+    },
+    configResolved(config) {
+      console.log(config.resolve)
+    },
+    configureServer(server){
+        server.middlewares.use((req, res, next) => {
+            if (req.url === '/test') {
+                res.end('hello vite')
+            } else {
+                next();
+            }
+        })
+    },
+    transformIndexHtml(html) {
+        console.log(html);
+    },
+    handleHotUpdata(ctx) {
+        console.log(ctx);
+        ctx.server.ws.send({
+            type: "custom",
+            event: 'test'
+        })
     }
+  }
 }
+ 
